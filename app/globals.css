@@ -24,3 +24,125 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+@theme {
+  --color-lightBlue-light: #b2ebf2;
+  --color-lightBlue-100: #e1f5fe;
+  --color-lightBlue-200: #b3e5fc;
+  --color-lightBlue-300: #81d4fa;
+  --color-lightBlue-400: #4fc3f7;
+  --color-lightBlue-500: #29b6f6;
+  --color-lightBlue-600: #03a9f4;
+  --color-lightBlue-700: #039be5;
+  --color-lightBlue-800: #0288d1;
+  --color-lightBlue-900: #0277bd;
+  --spacing-25: 100px;
+  --radius-sm: 10px;
+
+  --breakpoint-xs: 386px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+.container {
+  @apply mx-auto px-4;
+}
+
+@layer components {
+  .btn {
+    @apply py-2 px-5 rounded-sm hover:shadow active:shadow-gray-500 outline-0;
+  }
+  .btn-red {
+    @apply bg-red-500 hover:bg-red-600 text-white;
+  }
+  .btn-blue {
+    @apply bg-blue-500 hover:bg-blue-600 text-white;
+  }
+  .btn-yellow {
+    @apply bg-yellow-500 hover:bg-yellow-600 text-white;
+  }
+  .btn-green {
+    @apply bg-green-500 hover:bg-green-600 text-white;
+  }
+  .btn-gray {
+    @apply bg-gray-500 hover:bg-gray-600 text-white;
+  }
+  .btn-black {
+    @apply bg-black hover:bg-gray-900 text-white;
+  }
+  .btn-sky {
+    @apply bg-sky-300 hover:bg-sky-400 text-white;
+  }
+}
+.header {
+  background-image: url("/images/banana.jpg");
+}
+
+@keyframes spinOnce {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.links-banana {
+  animation: spinOnce 0.5s ease forwards;
+}
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-open {
+  animation: open 0.3s ease-out;
+}
+
+/* تنظیم فونت و سایز پایه برای کل پروژه */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "IRANSans", sans-serif;
+  line-height: 1.6;
+}
+
+/* ریسپانسیو کردن متن‌ها */
+h1,
+h2,
+h3,
+p,
+span {
+  font-size: clamp(1rem, 2vw, 2rem);
+}
+
+@layer base {
+  /* متن‌ها */
+  p,
+  span,
+  a,
+  li {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+
+  /* تیترها */
+  h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold;
+  }
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl font-semibold;
+  }
+
+  /* آیکون‌ها */
+  .icon {
+    @apply w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8;
+  }
+}
