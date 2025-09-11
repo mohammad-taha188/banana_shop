@@ -10,12 +10,11 @@ export default function LinksBanana() {
   const [open, setOpen] = useState(false);
 
   let params = usePathname(); // path name site
-
   return (
     <div className="">
       {open && (
         <div
-          className={`links w-9 border border-gray-300 shadow shadow-gray-200 rounded-sm px-1 py-1 fixed bottom-25 right-10 cursor-pointer animate-open flex flex-col items-center gap-3`}
+          className={`links w-9 border border-gray-300 shadow shadow-gray-200 rounded-sm px-1 py-1 fixed bottom-25 right-10 cursor-pointer animate-open flex flex-col items-center gap-3 bg-white`}
         >
           <Link href={"/"}>
             <Image
@@ -25,15 +24,12 @@ export default function LinksBanana() {
               height={40}
             ></Image>
           </Link>
-          <Link href={"/add-product"}>
+          <Link href={"/card"}>
             <Image
-              src={"/icon/plus.svg"}
+              src={params == "/card" ? "/icon/card-full.svg" : "/icon/card.svg"} //if params equal /card , params = card full icon , else card
               alt="home"
               width={40}
               height={40}
-              className={`
-               ${params == "/add-product" && "rotate-45 animate-spin"} 
-                `} //if params equal /add-product , params = rotate animation
             ></Image>
           </Link>{" "}
           <Link href={"/account"}>
@@ -50,7 +46,7 @@ export default function LinksBanana() {
       )}
 
       <div
-        className={`links-banana w-10 h-10 border border-gray-300 shadow shadow-gray-200 rounded-full px-1 py-1 fixed bottom-10 right-10 cursor-pointer transition-transform duration-700  ${
+        className={`links-banana w-10 h-10 border border-gray-300 shadow shadow-gray-200 rounded-full px-1 py-1 fixed bottom-10 right-10 cursor-pointer transition-transform duration-700 bg-white ${
           rotated ? "rotate-360" : "rotate-0"
         }`}
         onClick={(e) => {
