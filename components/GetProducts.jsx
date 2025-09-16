@@ -1,21 +1,26 @@
+import { supabase } from "@/app/supabase";
 import Image from "next/image";
 import Link from "next/link";
 
 async function GetProducts() {
-  const res = await fetch("https://dummyjson.com/products"); //fetch data
-  const data = await res.json();
+  const { data, error } = await supabase.from("products").select("*");
 
+  if (error) {
+    console.error("Error fetching products:", error);
+    throw new Error(error.message); // ← Next.js به error.jsx می‌ره
+  }
+  
   return (
     <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 w-full">
-      {data.products.map((product) => {
+      {data?.map((product) => {
         return (
           <Link
             className="border border-yellow-300 flex flex-col items-center px-4 py-2 gap-3 m-8 rounded-sm shadow shadow-amber-200"
-            key={product.id}
-            href={`product/${product.id}`}
+            key={product.productsId}
+            href={`/product/${product.productsId}`}
           >
             <Image
-              src={product.images[0]}
+              src={product.imageURL[0]}
               width={100}
               height={100}
               alt={product.title}

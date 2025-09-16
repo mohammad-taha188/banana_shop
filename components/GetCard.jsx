@@ -1,20 +1,29 @@
 "use client";
 
+import { supabase } from "@/app/supabase";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function GetCard() {
   const [data, setData] = useState();
   const [cards, setCards] = useState();
 
+  const navigate = useRouter();
+
   useEffect(() => {
     async function FetchData() {
-      const res = await fetch("https://dummyjson.com/products"); //fetch data
-      const productData = await res.json();
+      let { data: productData, error } = await supabase
+        .from("products")
+        .select("*");
 
       setCards(JSON.parse(localStorage?.getItem("cards")));
-      setData(await productData.products);
+      setData(productData);
+      if (error) {
+        router.push("/error"); // ← این بهتره برای client
+      }
     }
     FetchData();
   }, []);
@@ -35,10 +44,10 @@ function GetCard() {
               <Link
                 className="border border-yellow-300 flex flex-col items-center px-4 py-2 gap-3 m-8 rounded-sm shadow shadow-amber-200"
                 key={product.id}
-                href={`product/${product.id}`}
+                href={`product/${product.productsId}`}
               >
                 <Image
-                  src={product.images[0]}
+                  src={product.imageURL[0]}
                   width={100}
                   height={100}
                   alt={product.title}

@@ -10,6 +10,7 @@ export default function LinksBanana() {
   const [open, setOpen] = useState(false);
 
   let params = usePathname(); // path name site
+
   return (
     <div className="">
       {open && (
@@ -30,6 +31,15 @@ export default function LinksBanana() {
               alt="home"
               width={40}
               height={40}
+            ></Image>
+          </Link>{" "}
+          <Link href={"/add-product"}>
+            <Image
+              src={"/icon/plus.svg"} //if params equal /card , params = card full icon , else card
+              alt="home"
+              width={40}
+              height={40}
+              className={`${params == "/add-product" && "plus-rotate"} `}
             ></Image>
           </Link>{" "}
           <Link href={"/account"}>

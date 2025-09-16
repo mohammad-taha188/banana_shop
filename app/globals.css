@@ -92,6 +92,9 @@ body {
 .links-banana {
   animation: spinOnce 0.5s ease forwards;
 }
+.plus-rotate {
+  animation: spinOnce 1s infinite;
+}
 @keyframes open {
   from {
     opacity: 0;
@@ -117,32 +120,44 @@ body {
   line-height: 1.6;
 }
 
-/* ریسپانسیو کردن متن‌ها */
-h1,
-h2,
-h3,
-p {
-  font-size: clamp(1rem, 2vw, 2rem);
+html {
+  font-size: 16px;
 }
 
-@layer base {
-  /* متن‌ها */
-  p,
-  a,
-  li {
-    @apply text-sm sm:text-base md:text-lg;
-  }
+body {
+  font-family: "IRANSans", sans-serif;
+  line-height: 1.6;
+}
 
-  /* تیترها */
-  h1 {
-    @apply text-2xl sm:text-3xl md:text-4xl font-bold;
-  }
-  h2 {
-    @apply text-xl sm:text-2xl md:text-3xl font-semibold;
-  }
+/* متن‌ها */
+p,
+a,
+li {
+  font-size: clamp(0.875rem, 1vw + 0.5rem, 1.125rem); /* 14px → 18px */
+}
 
-  /* آیکون‌ها */
-  .icon {
-    @apply w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8;
-  }
+/* تیترها */
+h1 {
+  font-size: clamp(1.75rem, 2vw + 1rem, 3rem); /* 28px → 48px */
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 1.5vw + 0.75rem, 2.25rem); /* 24px → 36px */
+  font-weight: 600;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 1vw + 0.75rem, 1.75rem); /* 20px → 28px */
+  font-weight: 600;
+}
+
+/* آیکون‌ها */
+.icon {
+  width: clamp(1.25rem, 0.5vw + 1rem, 2rem); /* 20px → 32px */
+  height: clamp(1.25rem, 0.5vw + 1rem, 2rem);
+}
+
+html::selection {
+  background: yellow;
 }

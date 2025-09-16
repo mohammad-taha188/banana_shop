@@ -4,8 +4,7 @@ import { useState } from "react";
 
 function ImageProduct({ product }) {
   const [index, setIndex] = useState(0);
-  // if(product)
-  if (product.images.length > 1) {
+  if (product.imageURL.length > 1) {
     return (
       <div className="flex justify-center gap-3">
         <Image
@@ -18,13 +17,13 @@ function ImageProduct({ product }) {
             if (index != 0) {
               setIndex(index - 1);
             } else {
-              setIndex(product.images.length - 1);
+              setIndex(product.imageURL.length - 1);
             } //back image
           }}
         ></Image>
         <Image
           className="w-[50%] rounded-sm  border border-yellow-200"
-          src={product.images[index]}
+          src={product.imageURL[index]}
           width={100}
           height={100}
           alt={product.id}
@@ -36,7 +35,7 @@ function ImageProduct({ product }) {
           height={40}
           alt={"next"}
           onClick={() => {
-            if (index + 1 == product.images.length) {
+            if (index + 1 == product.imageURL.length) {
               setIndex(0);
             } else {
               setIndex(index + 1);
@@ -50,7 +49,7 @@ function ImageProduct({ product }) {
       <div className="flex justify-center gap-3">
         <Image
           className="w-[50%] rounded-sm border border-yellow-200 "
-          src={product.images[0]}
+          src={product.imageURL[0]}
           width={100}
           height={100}
           alt={product.id}
