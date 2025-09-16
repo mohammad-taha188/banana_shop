@@ -111,7 +111,7 @@ export default function SignUp({ params }) {
     }
     setPassowrdError(false);
 
-    let res = await fetch("http://192.168.1.10:3000/api/set-cookie", {
+    let res = await fetch("/api/set-cookie", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
