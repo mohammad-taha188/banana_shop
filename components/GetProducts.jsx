@@ -2,7 +2,6 @@ import { supabase } from "@/app/supabase";
 import Image from "next/image";
 import Link from "next/link";
 
-export const revalidate = 0;
 
 async function GetProducts() {
   const { data, error } = await supabase.from("products").select("*");

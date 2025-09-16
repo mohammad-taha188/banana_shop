@@ -1,5 +1,7 @@
 import GetProducts from "@/components/GetProducts";
 
+export const revalidate = 0;
+
 export default function Home() {
   return (
     <div className="">
