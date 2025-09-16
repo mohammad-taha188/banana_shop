@@ -67,9 +67,8 @@ function EditProduct({ product }) {
               placeholder="price..."
               name="desc"
               onChange={(e) => {
-                if(e.target.value >= 1){
-
-                    setPrice(e.target.value);
+                if (e.target.value >= 1) {
+                  setPrice(e.target.value);
                 }
               }}
               min={0}
@@ -164,7 +163,7 @@ function EditProduct({ product }) {
                   let { data, error } = await supabase
                     .from("products")
                     .update(updatedData)
-                    .eq("productssId", product?.productsId)
+                    .eq("productsId", product?.productsId)
                     .select();
                   if (error) {
                     setError(true);
