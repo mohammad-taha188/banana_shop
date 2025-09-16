@@ -2,6 +2,8 @@ import { supabase } from "@/app/supabase";
 import Image from "next/image";
 import Link from "next/link";
 
+export const revalidate = 0;
+
 async function GetProducts() {
   const { data, error } = await supabase.from("products").select("*");
 
@@ -9,7 +11,7 @@ async function GetProducts() {
     console.error("Error fetching products:", error);
     throw new Error(error.message); // ← Next.js به error.jsx می‌ره
   }
-  
+
   return (
     <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 w-full">
       {data?.map((product) => {
