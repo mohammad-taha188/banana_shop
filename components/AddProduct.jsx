@@ -15,7 +15,7 @@ export default function AddProduct() {
 
   const [loading, setLoading] = useState(false);
   const [notCompeleted, setNotCompeleted] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState();
   const [error, setError] = useState(false);
 
   let navigate = useRouter();
@@ -24,7 +24,7 @@ export default function AddProduct() {
     async function checkIsLogin() {
       let login = await GetID();
 
-      login?.userId ? setIsLogin(true) : setIsLogin(false);
+      login?.userId ? setIsLogin(login) : setIsLogin(false);
     }
     checkIsLogin();
   }, []);
@@ -129,10 +129,10 @@ export default function AddProduct() {
           </option>
           <option value="Electronics">Electronics</option>
           <option value="Clothing">Clothing</option>
-          <option value="Home & Kitchen">Home & Kitchen</option>
-          <option value="Books & Stationery">Books & Stationery</option>
-          <option value="Sports & Entertainment">Sports & Entertainment</option>
-          <option value="Beauty & Personal Care">Beauty & Personal Care</option>
+          <option value="Home-Kitchen">Home-Kitchen</option>
+          <option value="Books-Stationery">Books-Stationery</option>
+          <option value="Sports-Entertainment">Sports-Entertainment</option>
+          <option value="Beauty-Personal-Care">Beauty-Personal-Care</option>
         </select>
         <button
           className="btn btn-yellow"
@@ -159,6 +159,7 @@ export default function AddProduct() {
               });
               console.log(data);
               error ? setError(true) : setError(false);
+              navigate.push("/");
             }
             fetchData();
           }}

@@ -124,12 +124,11 @@ html {
   font-size: 16px;
 }
 
+html,
 body {
-  font-family: "IRANSans", sans-serif;
-  line-height: 1.6;
+  height: 100%; 
 }
 
-/* متن‌ها */
 p,
 a,
 li {

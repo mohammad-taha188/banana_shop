@@ -3,6 +3,7 @@ import AddToCard from "@/components/AddToCard";
 import EditProduct from "@/components/EditProduct";
 import GetID from "@/components/GetID";
 import ImageProduct from "@/components/ImageProduct";
+import Link from "next/link";
 
 async function Page({ params }) {
   let { id } = await params;
@@ -19,20 +20,22 @@ async function Page({ params }) {
     .select("*")
     .eq("userId", data[0]?.userId);
 
-  console.log(user);
-
   return (
     <div className="">
       {ID?.userId == user[0].userId && <EditProduct product={data[0]} />}
       <div className="flex justify-center mt-4 flex-col items-center w-full gap-6">
-        <h2 className="text-3xl">{data[0].title}</h2>
+        <h2 className="text-3xl wrap-anywhere text-center px-3">
+          {data[0].title}
+        </h2>
         <p>author : {user[0]?.userName ? user[0]?.userName : "unknown"}</p>
         <ImageProduct product={data[0]} />
         <p>{data[0].price}$</p>
         <p className="px-3 text-center">{data[0].desc}</p>
-        <p className="px-3 text-center py-2 bg-gray-200 rounded-sm cursor-pointer">
-          {data[0].category}
-        </p>
+        <Link href={`/?c=${data[0].category}`}>
+          <p className="px-3 text-center py-2 bg-gray-200 rounded-sm cursor-pointer">
+            {data[0].category}
+          </p>
+        </Link>
 
         <AddToCard id={data[0].id} />
         <br />

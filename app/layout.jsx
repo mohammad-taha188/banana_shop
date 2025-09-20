@@ -24,13 +24,22 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col place-content-between`}
       >
-        <Header />
+        <div className="">
+          <Header />
+        </div>
 
-        {children}
+        <div className="justify-self-start mb-auto mt-4">{children}</div>
 
-        <LinksBanana />
+        <div className="">
+          <LinksBanana />{" "}
+          <footer className="self-end footer w-full h-[200px] rounded-tl-[60%_20%] rounded-tr-[60%_20%] flex justify-end flex-col p-4">
+            <div className="px-3 py-2"></div>
+            &copy; {new Date().getFullYear()} Banana Shop
+            <h3 className="">welcome to the banana shop🍌</h3>
+          </footer>
+        </div>
       </body>
     </html>
   );
