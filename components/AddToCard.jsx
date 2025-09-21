@@ -3,10 +3,14 @@
 import { useEffect, useState } from "react";
 import GetID from "./GetID";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/app/supabase";
 
 function AddToCard({ id }) {
   const [cards, setCards] = useState([]);
   const [isLogin, setIsLogin] = useState();
+  const [userId, setUserId] = useState();
+  const [inCard, setInCard] = useState();
+  const [added, setAdded] = useState(false);
 
   const navigate = useRouter();
 
@@ -16,48 +20,88 @@ function AddToCard({ id }) {
 
       if (token?.userId) {
         setIsLogin(true);
+        setUserId(token?.userId);
       } else {
         setIsLogin(false);
+        setUserId(null);
       }
     }
     isLoginF();
-  });
+  }, []);
 
   // load saved cards on mount
 
   useEffect(() => {
-    const savedCards = JSON.parse(localStorage.getItem("cards") || "[]");
-    setCards(savedCards);
-  }, []);
+    if (!userId) return;
+    async function fetchData() {
+      let { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("userId", userId);
 
-  const isInCard = cards.includes(id); // boolean reactive
+      if (error) {
+        console.log(error);
+      } else {
+        const savedCards = await data[0]?.card;
 
-  const addToCard = () => {
+        setCards(savedCards);
+      }
+    }
+    fetchData();
+  }, [userId]);
+
+  useEffect(() => {
+    setInCard(cards?.includes(id));
+  }, [cards, id]);
+
+  async function addToCard() {
     if (isLogin) {
-      const newCards = [...cards, id];
+      const newCards = cards && [...cards, id];
       setCards(newCards); // update state → triggers re-render
-      localStorage.setItem("cards", JSON.stringify(newCards));
+
+      let { data, error } = await supabase
+        .from("users")
+        .update({ card: newCards })
+        .eq("userId", userId);
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        setAdded(true);
+      }
     } else {
       navigate.push("/account");
     }
-  };
+  }
 
-  const removeFromCard = () => {
+  async function removeFromCard() {
     if (isLogin) {
       const newCards = cards.filter((c) => c !== id);
       setCards(newCards); // update state → triggers re-render
-      localStorage.setItem("cards", JSON.stringify(newCards));
+
+      let { data, error } = await supabase
+        .from("users")
+        .update({ card: newCards })
+        .eq("userId", userId);
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        setAdded(true);
+      }
+
+      // localStorage.setItem("cards", JSON.stringify(newCards));
     } else {
       navigate.push("/account");
     }
-  };
+  }
   if (isLogin) {
     return (
       <button
-        className={isInCard ? "btn btn-red" : "btn btn-green"}
-        onClick={isInCard ? removeFromCard : addToCard}
+        className={inCard || added ? "btn btn-red" : "btn btn-green"}
+        onClick={inCard || added ? removeFromCard : addToCard}
       >
-        {isInCard ? "Remove from card" : "Add to card"}
+        {inCard || added ? "Remove from card" : "Add to card"}
       </button>
     );
   } else {

@@ -12,7 +12,7 @@ function SearchC({ search }) {
   }, []);
 
   return (
-    <div className="w-full flex justify-center gap-4">
+    <div className="w-full flex justify-center gap-4 mb-6">
       <input
         type="text"
         defaultValue={search ? search : ""}

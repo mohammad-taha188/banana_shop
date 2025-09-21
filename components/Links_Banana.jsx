@@ -45,7 +45,11 @@ export default function LinksBanana() {
           <Link href={"/account"}>
             <Image
               src={
-                params == "/account" ? "/icon/user-full.svg" : "/icon/user.svg"
+                params == "/account" &&
+                "/account/product" &&
+                "/account/admin-dashboard"
+                  ? "/icon/user-full.svg"
+                  : "/icon/user.svg"
               } //if params equal /account , params = user full icon , else user
               alt="account"
               width={40}

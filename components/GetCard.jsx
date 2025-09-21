@@ -6,6 +6,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import GetID from "./GetID";
 
 function GetCard() {
   const [data, setData] = useState();
@@ -15,14 +16,23 @@ function GetCard() {
 
   useEffect(() => {
     async function FetchData() {
+      let id = await GetID();
+
       let { data: productData, error } = await supabase
         .from("products")
         .select("*");
 
-      setCards(JSON.parse(localStorage?.getItem("cards")));
+      let { data, error: userError } = await supabase
+        .from("users")
+        .select("*")
+        .eq("userId", id?.userId);
+
+      setCards(data[0]?.card);
+
       setData(productData);
+
       if (error) {
-        router.push("/error"); // ← این بهتره برای client
+        navigate.push("/error");
       }
     }
     FetchData();

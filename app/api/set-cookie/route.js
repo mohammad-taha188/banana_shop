@@ -19,7 +19,7 @@ export async function POST(req) {
     res.cookies.set("token", token, {
       httpOnly: true, // فقط سمت سرور خونده میشه
       path: "/", // کل سایت
-      maxAge: 60 * 60 * 24, // یک روز
+      maxAge: 60 * 60 * 24 * 30, // 1 ماه
     });
     return res;
   } catch (error) {
