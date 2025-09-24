@@ -2,14 +2,24 @@ import { supabase } from "@/app/supabase";
 import Image from "next/image";
 import Link from "next/link";
 import SearchC from "./Search";
+import FilterData from "./FilterData";
 
 async function GetProducts({ searchParams }) {
   let params = await searchParams;
 
   let category = params.c;
   let search = params.s;
+  let filter = params.f;
 
-  const { data, error } = await supabase.from("products").select("*");
+  console.log(filter);
+
+  let query = supabase.from("products").select("*");
+
+  if (filter) {
+    query = query.order(filter, { ascending: true });
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error("Error fetching products:", error);
@@ -25,6 +35,7 @@ async function GetProducts({ searchParams }) {
   return (
     <div className="flex items-center flex-col mt-6">
       <SearchC search={search} />
+      <FilterData filter={filter} />
       <div className="">
         {category && (
           <Link href={"/"}>
@@ -50,7 +61,14 @@ async function GetProducts({ searchParams }) {
                 className="rounded-sm"
               ></Image>
               <h4 className="">{product.title}</h4>
-              <p>🍌{product.price}$🍌</p>
+              {product.discount ? (
+                <div className="text-center">
+                  <del>{product.price}$</del>
+                  <p>🍌{product.discount}$🍌</p>
+                </div>
+              ) : (
+                <p>🍌{product.price}$🍌</p>
+              )}
             </Link>
           );
         })}

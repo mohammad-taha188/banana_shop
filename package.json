@@ -12,6 +12,7 @@
     "@vercel/blob": "^1.1.1",
     "bcryptjs": "^3.0.2",
     "cookies": "^0.9.1",
+    "framer-motion": "^12.23.19",
     "jsonwebtoken": "^9.0.2",
     "next": "15.5.2",
     "react": "19.1.0",

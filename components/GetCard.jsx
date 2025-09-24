@@ -11,6 +11,7 @@ import GetID from "./GetID";
 function GetCard() {
   const [data, setData] = useState();
   const [cards, setCards] = useState();
+  const [total, setTotal] = useState(0);
 
   const navigate = useRouter();
 
@@ -43,6 +44,11 @@ function GetCard() {
       return cards.includes(product.id);
     });
 
+    const totalPrice = productsFilter.reduce(
+      (acc, product) => acc + (product.discount || product.price),
+      0
+    );
+
     return (
       <div className="flex flex-col items-center mt-2">
         <span className="text-gray-800 text-[16px] lg:text-[24px] font-bold md:text-[22px] sm:text-[20px]">
@@ -64,11 +70,20 @@ function GetCard() {
                   className="rounded-sm"
                 ></Image>
                 <h4>{product.title}</h4>
-                <p>🍌{product.price}$🍌</p>
+                {product.discount ? (
+                  <div className="text-center">
+                    <del>{product.price}$</del>
+                    <p>🍌{product.discount}$🍌</p>
+                  </div>
+                ) : (
+                  <p>🍌{product.price}$🍌</p>
+                )}
               </Link>
             );
           })}
         </div>
+        <div className="w-full h-px bg-black"></div>
+        <h2 className="text-center">total : {totalPrice}$</h2>
       </div>
     );
   }

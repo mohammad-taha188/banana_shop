@@ -11,8 +11,10 @@ function EditProduct({ product }) {
   const [desc, setDesc] = useState();
   const [price, setPrice] = useState();
   const [images, setImages] = useState();
+  const [discount, setDiscount] = useState();
   const [category, setCategory] = useState();
   const [loading, setLoading] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
 
   const [error, setError] = useState(false);
 
@@ -148,6 +150,18 @@ function EditProduct({ product }) {
                 Beauty & Personal Care
               </option>
             </select>
+            <input
+              type="number"
+              placeholder="discount..."
+              name="desc"
+              onChange={(e) => {
+                if (e.target.value >= 1) {
+                  setDiscount(e.target.value);
+                }
+              }}
+              min={0}
+              className="w-[50%] border border-gray-300 shadow shadow-gray-200 rounded-sm px-2 py-1 focus:outline focus:outline-gray-300"
+            />
             <button
               className="btn btn-yellow"
               onClick={() => {
@@ -157,6 +171,7 @@ function EditProduct({ product }) {
                 if (price) updatedData.price = price;
                 if (images) updatedData.imageURL = images;
                 if (category) updatedData.category = category;
+                if (discount) updatedData.discount = discount;
 
                 console.log(updatedData);
                 async function fetchData() {
@@ -179,6 +194,44 @@ function EditProduct({ product }) {
             >
               edit product
             </button>
+            <button
+              className="btn btn-red"
+              onClick={() => {
+                setIsDelete(true);
+              }}
+            >
+              delet proruct
+            </button>
+            <div className={`${isDelete ? "flex" : "hidden"} gap-4 `}>
+              <button
+                className="btn btn-red"
+                onClick={() => {
+                  async function fetchData() {
+                    let { data, error } = await supabase
+                      .from("products")
+                      .delete()
+                      .eq("productsId", product.productsId);
+
+                    if (error) {
+                      setError(true);
+                    } else {
+                      navigate.push("/");
+                    }
+                  }
+                  fetchData();
+                }}
+              >
+                delete
+              </button>
+              <button
+                className="btn btn-yellow"
+                onClick={() => {
+                  setIsDelete(false);
+                }}
+              >
+                cancel
+              </button>
+            </div>
             {error && <p className="text-red-500">try again please</p>}
           </div>
         ) : null}

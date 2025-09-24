@@ -46,7 +46,7 @@ export default function LinksBanana() {
             <Image
               src={
                 params == "/account" &&
-                "/account/product" &&
+                "/account/products" &&
                 "/account/admin-dashboard"
                   ? "/icon/user-full.svg"
                   : "/icon/user.svg"

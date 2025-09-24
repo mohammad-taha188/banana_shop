@@ -23,7 +23,7 @@ function SearchC({ search }) {
         }}
         onKeyDown={(e) => {
           if (e.code == "Enter") {
-            navigate.push(`/?s=${value}`);
+            navigate.push(`?s=${value}`);
           }
         }}
       />
@@ -31,7 +31,7 @@ function SearchC({ search }) {
       <button
         className="btn btn-yellow"
         onClick={() => {
-          navigate.push(`/?s=${value}`);
+          navigate.push(`?s=${value}`);
         }}
       >
         search

@@ -1,9 +1,7 @@
 "use client";
 import Link from "next/link";
 
-
 function Header() {
-
   return (
     <header className="header w-full h-[200px] rounded-bl-[60%_20%] rounded-br-[60%_20%] flex justify-center">
       <div className="px-3 py-2"></div>
