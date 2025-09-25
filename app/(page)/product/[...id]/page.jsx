@@ -32,7 +32,7 @@ async function Page({ params }) {
 
   return (
     <div className="">
-      {(ID?.userId == userAuthor[0].userId || userPrevew[0].isAdmin) && (
+      {(ID?.userId == userAuthor[0]?.userId || userPrevew[0]?.isAdmin) && (
         <EditProduct product={data[0]} />
       )}
 

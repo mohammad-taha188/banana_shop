@@ -83,7 +83,7 @@ function GetCard() {
           })}
         </div>
         <div className="w-full h-px bg-black"></div>
-        <h2 className="text-center">total : {totalPrice}$</h2>
+        <h2 className="text-center">total : {totalPrice.toFixed(2)}$</h2>
       </div>
     );
   }

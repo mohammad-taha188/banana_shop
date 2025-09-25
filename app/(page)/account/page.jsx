@@ -18,9 +18,9 @@ export default async function Page({ searchParams }) {
       {isLogin?.userId ? (
         <div className="flex flex-col items-center mt-7">
           <div className="border border-yellow-200 shadow shadow-yellow-300 rounded-sm flex flex-col justify-center items-center px-4 py-3 gap-4 my-4">
-            <h3>user name : {user[0].userName}</h3>
-            <h3>name : {user[0].name}</h3>
-            <h3>email : {user[0].email}</h3>
+            <p>user name : {user[0].userName}</p>
+            <p>name : {user[0].name}</p>
+            <p>email : {user[0].email}</p>
           </div>
           <Logout />
         </div>

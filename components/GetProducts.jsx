@@ -7,6 +7,7 @@ import FilterData from "./FilterData";
 async function GetProducts({ searchParams }) {
   let params = await searchParams;
 
+  console.log(params);
   let category = params.c;
   let search = params.s;
   let filter = params.f;
@@ -33,12 +34,12 @@ async function GetProducts({ searchParams }) {
     : data;
 
   return (
-    <div className="flex items-center flex-col mt-6">
+    <div className="flex items-center flex-col mt-6 justify-center">
       <SearchC search={search} />
-      <FilterData filter={filter} />
+      <FilterData />
       <div className="">
         {category && (
-          <Link href={"/"}>
+          <Link href={filter ? `?f=${filter}` : "/"}>
             <p className="text-center px-2 py-1 bg-gray-200 rounded-sm cursor-pointer">
               {category}
             </p>

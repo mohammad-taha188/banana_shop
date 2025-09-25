@@ -1,4 +1,5 @@
 import { supabase } from "@/app/supabase";
+import FilterData from "@/components/FilterData";
 import GetID from "@/components/GetID";
 import SearchC from "@/components/Search";
 import Image from "next/image";
@@ -9,24 +10,29 @@ async function adminDashboard({ searchParams }) {
   let userId = await GetID();
   let params = await searchParams;
 
+  let category = params.c;
   let search = params.s;
+  let filter = params.f;
 
   let { data: userData, error } = await supabase.from("users").select("*");
   let thisUser = userData.filter((u) => u.userId == userId?.userId);
 
-  let { data: products, error: errorProducts } = await supabase
-    .from("products")
-    .select("*");
+  let query = supabase.from("products").select("*");
 
+  if (filter) {
+    query = query.order(filter, { ascending: true });
+  }
+
+  const { data, error: productError } = await query;
   if (thisUser[0].isAdmin !== true) {
     return notFound();
   }
 
-  let product = search
-    ? products?.filter((p) =>
-        p.title.toLowerCase().includes(search.toLowerCase())
-      )
-    : products;
+  let product = category
+    ? data.filter((p) => p.category == category)
+    : search
+    ? data?.filter((p) => p.title.toLowerCase().includes(search.toLowerCase()))
+    : data;
 
   return (
     <div className="flex flex-col items-center">
@@ -36,6 +42,7 @@ async function adminDashboard({ searchParams }) {
         <summary className="cursor-pointer select-none">all products</summary>
         <div className="mt-5">
           <SearchC />
+          <FilterData />
         </div>
         <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 w-full">
           {product?.map((product) => {

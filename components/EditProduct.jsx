@@ -34,7 +34,7 @@ function EditProduct({ product }) {
       ></Image>
       <div className="w-full flex justify-center items-center mt-20 ">
         {isVisible ? (
-          <div className="z-50 fixed mt-44 w-[80%] border border-gray-200 shadow shadow-gray-300 bg-white px-3 py-5 flex flex-col items-center gap-5 rounded-sm">
+          <div className="z-50 fixed mt-22 w-full border border-gray-200 shadow shadow-gray-300 bg-white px-3 py-5 flex flex-col items-center gap-5 rounded-sm">
             <Image
               src={"/icon/plus.svg"}
               width={25}
@@ -53,7 +53,7 @@ function EditProduct({ product }) {
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
-              className="w-[70%] border border-gray-300 shadow shadow-gray-200 rounded-sm px-2 py-1 focus:outline focus:outline-gray-300"
+              className="w-[90%] border border-gray-300 shadow shadow-gray-200 rounded-sm px-2 py-1 focus:outline focus:outline-gray-300"
             />
             <textarea
               type="text"
@@ -62,7 +62,7 @@ function EditProduct({ product }) {
               onChange={(e) => {
                 setDesc(e.target.value);
               }}
-              className="w-[70%] h-[100px] resize-y border border-gray-300 shadow shadow-gray-200 rounded-sm px-2 py-1 focus:outline focus:outline-gray-300"
+              className="w-[90%] h-[100px] resize-y border border-gray-300 shadow shadow-gray-200 rounded-sm px-2 py-1 focus:outline focus:outline-gray-300"
             ></textarea>
             <input
               type="number"
@@ -74,7 +74,7 @@ function EditProduct({ product }) {
                 }
               }}
               min={0}
-              className="w-[70%] border border-gray-300 shadow shadow-gray-200 rounded-sm px-2 py-1 focus:outline focus:outline-gray-300"
+              className="w-[90%] border border-gray-300 shadow shadow-gray-200 rounded-sm px-2 py-1 focus:outline focus:outline-gray-300"
             />
             <label
               htmlFor="images"
@@ -141,6 +141,7 @@ function EditProduct({ product }) {
               </option>
               <option value="Electronics">Electronics</option>
               <option value="Clothing">Clothing</option>
+              <option value="Fun">Fun</option>
               <option value="Home & Kitchen">Home & Kitchen</option>
               <option value="Books & Stationery">Books & Stationery</option>
               <option value="Sports & Entertainment">

@@ -17,7 +17,7 @@ function SearchC({ search }) {
         type="text"
         defaultValue={search ? search : ""}
         placeholder="search..."
-        className="border border-gray-300 shadow shadow-gray-200 rounded-sm focus:outline focus:outline-gray-400 w-[80%] px-2 py-1"
+        className="border border-gray-300 shadow shadow-gray-200 rounded-sm focus:outline focus:outline-gray-400 w-[70%] lg:w-[80%] px-2 py-1"
         onChange={(e) => {
           setValue(e.target.value);
         }}

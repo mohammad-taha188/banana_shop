@@ -45,9 +45,9 @@ export default function LinksBanana() {
           <Link href={"/account"}>
             <Image
               src={
-                params == "/account" &&
-                "/account/products" &&
-                "/account/admin-dashboard"
+                params == "/account" ||
+                params == "/account/products" ||
+                params == "/account/admin-dashboard"
                   ? "/icon/user-full.svg"
                   : "/icon/user.svg"
               } //if params equal /account , params = user full icon , else user
