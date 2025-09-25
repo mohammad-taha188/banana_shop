@@ -11,8 +11,10 @@ async function userPage({ params, searchParams }) {
 
   let search = Searchparam.s;
 
-  let { data } = await supabase.from("users").select("*");
-  let { data: products } = await supabase.from("products").select("*");
+  let { data, error } = await supabase.from("users").select("*");
+  let { data: products, error: errorProduct } = await supabase
+    .from("products")
+    .select("*");
 
   let userProducts = products.filter((p) => p.userId == userId);
 
@@ -31,9 +33,7 @@ async function userPage({ params, searchParams }) {
     <div className="flex flex-col items-center gap-2">
       <h2>#{thisUser[0]?.userName}</h2>
       <p>name : {thisUser[0]?.name}</p>
-
       <p>email : {thisUser[0]?.email}</p>
-      
       <details className="border border-gray-300 shadow shadow-gray-200 rounded-sm px-3 py-2 w-[80%] text-center my-5">
         <summary className="cursor-pointer select-none">all products</summary>
         <div className="mt-5">
@@ -61,6 +61,16 @@ async function userPage({ params, searchParams }) {
           })}
         </div>
       </details>
+      {error && (
+        <p className="text-red-500">
+          please try again <br /> {error}
+        </p>
+      )}{" "}
+      {errorProduct && (
+        <p className="text-red-500">
+          please try again <br /> {errorProduct}
+        </p>
+      )}
     </div>
   );
 }

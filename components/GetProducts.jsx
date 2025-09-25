@@ -74,6 +74,11 @@ async function GetProducts({ searchParams }) {
           );
         })}
       </div>
+      {error && (
+        <p className="text-red-500">
+          please try again <br /> {error}
+        </p>
+      )}
     </div>
   );
 }

@@ -28,6 +28,13 @@ async function adminDashboard({ searchParams }) {
     return notFound();
   }
 
+  if (error) {
+    console.log(error);
+  }
+  if (productError) {
+    console.log(productError);
+  }
+
   let product = category
     ? data.filter((p) => p.category == category)
     : search
@@ -84,6 +91,16 @@ async function adminDashboard({ searchParams }) {
           })}
         </div>
       </details>
+      {error && (
+        <p className="text-red-500">
+          please try again <br /> {error}
+        </p>
+      )}
+      {productError && (
+        <p className="text-red-500">
+          please try again <br /> {productError}
+        </p>
+      )}
     </div>
   );
 }
